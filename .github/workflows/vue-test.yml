@@ -34,8 +34,8 @@ jobs:
 
 
     - run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@ec2-54-171-78-118.eu-west-1.compute.amazonaws.com 
+          echo chmod 400 "$PRIVATE_KEY"
+          ssh -o StrictHostKeyChecking=no -i $PRIVATE_KEY ubuntu@ec2-54-171-78-118.eu-west-1.compute.amazonaws.com 
           
 #     - run: "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no ubuntu@ec2-54-171-78-118.eu-west-1.compute.amazonaws.com" 
 
