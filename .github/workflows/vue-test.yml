@@ -42,7 +42,7 @@ jobs:
 #       working-directory: vue
      # Deploy
     - run: mkdir dist
-    - run: cd dist && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . pepelsbey@pepelsbey.dev:/var/www/pepelsbey.dev/html/
+    - run: cd dist && rsync -e "ssh -i ${{ secrets.KEY_EC2 }} -o StrictHostKeyChecking=no" --archive --compress --delete . pepelsbey@pepelsbey.dev:/var/www/pepelsbey.dev/html/
 
       
 #     - run: |
