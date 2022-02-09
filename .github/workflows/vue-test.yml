@@ -19,6 +19,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
+      env:
+            PRIVATE_KEY: ${{ secrets.KEY_EC2  }}
+            HOSTNAME : ${{ secrets.HOSTNAME  }}
+            USER_NAME : ${{ secrets.USER_NAME  }}
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
@@ -27,3 +31,6 @@ jobs:
       working-directory: vue
     - run: npm run build 
       working-directory: vue
+      
+    - run: echo "$PRIVATE_KEY" > private_key && chmod 600 private_keyssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+      
