@@ -32,21 +32,12 @@ jobs:
 #     - run: npm run build 
 #       working-directory: vue
 
-    - run: set -eu
-    - run: mkdir "$HOME/.ssh"
-    - run: echo "${{ secrets.KEY_EC2 }}" > "$HOME/.ssh/key"
-    - run: chmod 400 "$HOME/.ssh/key"
-    # Build
-#     - run: npm ci
-#     - run: npm run build
-#       working-directory: vue 
-     # Deploy
-#     - run: mkdir dist
-# #     - run: chmod 400 ${{ secrets.KEY_EC2 }}
-#     - run: mkdir "github-actions.pem"
-#     - run: echo "${{ secrets.key }}" > "github-actions.pem"
-#     - run: chmod 400 "github-actions.pem"
-    - run: "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no ubuntu@ec2-54-171-78-118.eu-west-1.compute.amazonaws.com" 
+
+    - run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@ec2-54-171-78-118.eu-west-1.compute.amazonaws.com 
+          
+#     - run: "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no ubuntu@ec2-54-171-78-118.eu-west-1.compute.amazonaws.com" 
 
       
 #     - run: |
