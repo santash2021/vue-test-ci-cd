@@ -42,7 +42,10 @@ jobs:
 #       working-directory: vue 
      # Deploy
     - run: mkdir dist
-    - run: chmod 400 ${{ secrets.KEY_EC2 }}
+#     - run: chmod 400 ${{ secrets.KEY_EC2 }}
+    - run: mkdir "github-actions.pem"
+    - run: echo "${{ secrets.key }}" > "github-actions.pem"
+    - run: chmod 400 "github-actions.pem"
     - run: cd dist && rsync -e "ssh -i ${{ secrets.KEY_EC2 }} -o StrictHostKeyChecking=no" --archive --compress --delete . pepelsbey@pepelsbey.dev:/var/www/pepelsbey.dev/html/
 
       
