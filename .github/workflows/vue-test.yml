@@ -27,10 +27,21 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
          
-    - run: npm i
-      working-directory: vue
-    - run: npm run build 
-      working-directory: vue
+#     - run: npm i
+#       working-directory: vue
+#     - run: npm run build 
+#       working-directory: vue
       
-    - run:  chmod 600 private_keyssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+    - run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+          
+            #Now we have got the access of EC2 and we will start the deploy .
+            cd /home/ubuntu/CounterApp &&
+            git checkout master &&
+            git fetch --all &&
+            git reset --hard origin/master &&
+            git pull origin master &&
+            docker-compose -f docker-compose.prod.yml up -d --build 
+          '
       
