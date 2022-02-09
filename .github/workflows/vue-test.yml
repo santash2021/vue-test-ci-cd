@@ -33,7 +33,7 @@ jobs:
 #       working-directory: vue
       
     - run: |
-          ssh -i ${PRIVATE_KEY} ubuntu@ec2-3-131-36-182.us-east-2.compute.amazonaws.com
+          ssh -o StrictHostKeyChecking=no -i ${PRIVATE_KEY} ubuntu@ec2-3-131-36-182.us-east-2.compute.amazonaws.com
 
 
       
