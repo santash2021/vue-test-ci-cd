@@ -46,7 +46,7 @@ jobs:
 #     - run: mkdir "github-actions.pem"
 #     - run: echo "${{ secrets.key }}" > "github-actions.pem"
 #     - run: chmod 400 "github-actions.pem"
-    - run: cd dist && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . pepelsbey@pepelsbey.dev:/var/www/pepelsbey.dev/html/
+    - run: "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no ubuntu@ec2-54-171-78-118.eu-west-1.compute.amazonaws.com" 
 
       
 #     - run: |
