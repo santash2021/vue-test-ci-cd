@@ -38,8 +38,8 @@ jobs:
     - run: chmod 600 "$HOME/.ssh/key"
     # Build
 #     - run: npm ci
-    - run: npm run build
-      working-directory: vue
+#     - run: npm run build
+#       working-directory: vue
      # Deploy
     - run: cd dist && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . pepelsbey@pepelsbey.dev:/var/www/pepelsbey.dev/html/
 
