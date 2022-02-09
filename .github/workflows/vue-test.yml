@@ -32,5 +32,5 @@ jobs:
     - run: npm run build 
       working-directory: vue
       
-    - run: echo "$PRIVATE_KEY" > private_key && chmod 600 private_keyssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+    - run:  chmod 600 private_keyssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
       
