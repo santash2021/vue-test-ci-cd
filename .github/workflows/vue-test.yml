@@ -31,9 +31,21 @@ jobs:
 #       working-directory: vue
 #     - run: npm run build 
 #       working-directory: vue
+
+    - run: set -eu
+    - run: mkdir "$HOME/.ssh"
+    - run: echo "${{ secrets.KEY_EC2 }}" > "$HOME/.ssh/key"
+    - run: chmod 600 "$HOME/.ssh/key"
+    # Build
+    - run: npm ci
+    - run: npm run build
+     # Deploy
+    - run: cd dist && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . pepelsbey@pepelsbey.dev:/var/www/pepelsbey.dev/html/
+
       
-    - run: |
-          ssh -o StrictHostKeyChecking=no -i ${PRIVATE_KEY} ubuntu@ec2-3-131-36-182.us-east-2.compute.amazonaws.com
+#     - run: |
+#           ssh -o StrictHostKeyChecking=no -i ${PRIVATE_KEY} ubuntu@ec2-3-131-36-182.us-east-2.compute.amazonaws.com
+          
 
 
       
